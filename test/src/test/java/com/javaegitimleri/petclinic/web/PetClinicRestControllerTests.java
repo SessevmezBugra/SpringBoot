@@ -9,12 +9,16 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import com.javaegitimleri.petclinic.exception.OwnerNotFoundException;
 import com.javaegitimleri.petclinic.model.Owner;
 
 import ch.qos.logback.core.boolex.Matcher;
+import junit.framework.Assert;
 
 public class PetClinicRestControllerTests {
 	private RestTemplate restTemplate;
@@ -22,6 +26,26 @@ public class PetClinicRestControllerTests {
 	@Before
 	public void setUp() {
 		restTemplate = new RestTemplate();
+	}
+	
+	@Test
+	public void testDeleteOwner() {
+		restTemplate.delete("http://localhost:8080/rest/owner/1");
+		try {
+			restTemplate.getForEntity("http://localhost:8080/rest/owner/1", Owner.class);
+			Assert.fail("should have not returned");
+		}catch (HttpClientErrorException e) {
+			MatcherAssert.assertThat(e.getStatusCode(), Matchers.equalTo(404));
+		}
+	}
+	@Test
+	public void testOwnerUpdate() {
+		Owner owner = restTemplate.getForObject("http://localhost:8080/rest/owner/4", Owner.class);
+		MatcherAssert.assertThat(owner.getFirstName(), Matchers.equalTo("Hazal"));
+		owner.setFirstName("Ali");
+		restTemplate.put("http://localhost:8080/rest/owner/4", owner);
+		owner = restTemplate.getForObject("http://localhost:8080/rest/owner/4", Owner.class);
+		MatcherAssert.assertThat(owner.getFirstName(), Matchers.equalTo("Ali"));
 	}
 	
 	@Test
