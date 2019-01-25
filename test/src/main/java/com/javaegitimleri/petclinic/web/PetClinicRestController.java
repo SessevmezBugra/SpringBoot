@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.javaegitimleri.petclinic.exception.InternalServerException;
@@ -28,9 +29,17 @@ public class PetClinicRestController {
 	@Autowired
 	PetClinicService petClinicService;
 	
+	@RequestMapping(value= {"/","/index.html"})
+	public ModelAndView index() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("index");
+		return mav;
+	}
+	
 	@RequestMapping(method=RequestMethod.DELETE, value="/owner/{id}")
 	public ResponseEntity<?> deleteOwner(@PathVariable("id") Long id){
 		try {
+//			System.err.println("IDDDDDDDD: "+id);
 			petClinicService.deleteOwner(id);
 			return ResponseEntity.ok().build();
 		} catch (OwnerNotFoundException e) {
