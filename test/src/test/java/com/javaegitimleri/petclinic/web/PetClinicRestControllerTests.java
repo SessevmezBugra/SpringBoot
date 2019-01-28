@@ -10,6 +10,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
@@ -28,13 +29,14 @@ public class PetClinicRestControllerTests {
 	@Before
 	public void setUp() {
 		restTemplate = new RestTemplate();
-		BasicAuthorizationInterceptor basicAuthorizationInterceptor = new BasicAuthorizationInterceptor("user", "secret");
+		BasicAuthorizationInterceptor basicAuthorizationInterceptor = new BasicAuthorizationInterceptor("user3", "secret");
 		restTemplate.setInterceptors(Arrays.asList(basicAuthorizationInterceptor));
 	}
 	
 	@Test
 	public void testDeleteOwner() {
-		restTemplate.delete("http://localhost:8080/rest/owner/1");
+//		restTemplate.delete("http://localhost:8080/rest/owner/1");
+		restTemplate.exchange("http://localhost:8080/rest/owner/1", HttpMethod.DELETE,null,Void.class);
 		try {
 			restTemplate.getForEntity("http://localhost:8080/rest/owner/1", Owner.class);
 			Assert.fail("should have not returned");

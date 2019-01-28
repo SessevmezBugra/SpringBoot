@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.javaegitimleri.petclinic.dao.PetRepository;
 import com.javaegitimleri.petclinic.model.Pet;
 
-@Repository
+@Repository("petRepository")
 public class PetRepositoryJdbcImpl implements PetRepository {
 	
 	@Autowired

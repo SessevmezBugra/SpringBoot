@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.javaegitimleri.petclinic.dao.PetRepository;
 import com.javaegitimleri.petclinic.model.Pet;
 
-@Repository("petRepository")
+@Repository
 public class PetRepositoryJpaImpl implements PetRepository {
 	
 	@PersistenceContext
