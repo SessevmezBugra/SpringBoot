@@ -1,3 +1,14 @@
+INSERT INTO users VALUES('user','{bcrypt}$2a$10$R6T8gK7yhdMIp7ZaMHbN.OFdemhgCVF/CIfoK1WP7DrQamBTkRO6G',true);
+INSERT INTO users VALUES('user2','{bcrypt}$2a$10$vvHfzYTzhBrWcygEVN/yGufaaQjfao9e.GCUE4WM33KMZmEy7gld2',true);
+INSERT INTO users VALUES('user3','{bcrypt}$2a$10$uU/FcGtNZaSoJuaNnqWyjOI6u2D58vQNi1E6L4jp3fr9Dp5tBqwfi',true);
+
+INSERT INTO authorities VALUES('user1','ROLE_USER');
+INSERT INTO authorities VALUES('user2','ROLE_USER');
+INSERT INTO authorities VALUES('user2','ROLE_EDITOR');
+INSERT INTO authorities VALUES('user3','ROLE_USER');
+INSERT INTO authorities VALUES('user3','ROLE_EDITOR');
+INSERT INTO authorities VALUES('user3','ROLE_ADMIN');
+
 INSERT INTO t_owner(id,first_name,last_name) VALUES(1,'Buğra','SESSEVMEZ');
 INSERT INTO t_owner (id,first_name,last_name) VALUES (2, 'Beşir', 'Dal');
 INSERT INTO t_owner (id,first_name,last_name) VALUES (3, 'Eda', 'Rize');

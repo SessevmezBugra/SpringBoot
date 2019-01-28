@@ -1,3 +1,16 @@
+CREATE TABLE users(
+	username varchar(128) NOT NULL PRIMARY KEY,
+	password varchar(128) NOT NULL,
+	enabled boolean NOT null
+);
+
+CREATE TABLE authorities(
+	username varchar(128) NOT NULL,
+	authority varchar(128) NOT NULL
+);
+
+CREATE UNIQUE INDEX idx_auth_username ON authorities(username, authority);
+
 CREATE TABLE public.t_owner(
 	id bigint NOT NULL,
 	first_name varchar(255),
