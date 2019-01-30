@@ -13,8 +13,8 @@ CREATE UNIQUE INDEX idx_auth_username ON authorities(username, authority);
 
 CREATE TABLE public.t_owner(
 	id bigint NOT NULL,
-	first_name varchar(255),
-	last_name varchar(255)
+	first_name varchar(255) NOT NULL,
+	last_name varchar(255) NOT NULL
 );
 
 CREATE TABLE public.t_pet(

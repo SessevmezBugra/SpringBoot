@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,9 +27,11 @@ public class Owner {
 	@SequenceGenerator(name="petClinicSeqGen",sequenceName="petclinic_sequence")
 	private Long id;
 	
+	@NotEmpty
 	@Column(name="first_name")
 	private String firstName;
 	
+	@NotEmpty
 	@Column(name="last_name")
 	private String lastName;
 	

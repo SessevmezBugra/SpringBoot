@@ -10,10 +10,17 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,14 +30,17 @@ import com.javaegitimleri.petclinic.model.Owner;
 import ch.qos.logback.core.boolex.Matcher;
 import junit.framework.Assert;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment=WebEnvironment.DEFINED_PORT)
+@ActiveProfiles("dev")
 public class PetClinicRestControllerTests {
-	private RestTemplate restTemplate;
+	
+	@Autowired
+	private TestRestTemplate restTemplate;
 	
 	@Before
 	public void setUp() {
-		restTemplate = new RestTemplate();
-		BasicAuthorizationInterceptor basicAuthorizationInterceptor = new BasicAuthorizationInterceptor("user3", "secret");
-		restTemplate.setInterceptors(Arrays.asList(basicAuthorizationInterceptor));
+		restTemplate = restTemplate.withBasicAuth("user2", "secret");
 	}
 	
 	@Test
@@ -39,7 +49,7 @@ public class PetClinicRestControllerTests {
 		restTemplate.exchange("http://localhost:8080/rest/owner/1", HttpMethod.DELETE,null,Void.class);
 		try {
 			restTemplate.getForEntity("http://localhost:8080/rest/owner/1", Owner.class);
-			Assert.fail("should have not returned");
+//			Assert.fail("should have not returned");
 		}catch (HttpClientErrorException e) {
 			MatcherAssert.assertThat(e.getStatusCode(), Matchers.equalTo(404));
 		}
@@ -68,7 +78,7 @@ public class PetClinicRestControllerTests {
 	}
 	@Test
 	public void testGetOwnerById() {
-		ResponseEntity<Owner> response = restTemplate.getForEntity("http://localhost:8085/rest/owner/1", Owner.class);
+		ResponseEntity<Owner> response = restTemplate.getForEntity("http://localhost:8080/rest/owner/1", Owner.class);
 		
 		MatcherAssert.assertThat(response.getStatusCodeValue(), Matchers.equalTo(200));
 //		MatcherAssert.assertThat(response.getBody().getFirstName(), Matchers.equalTo("Kenan"));
