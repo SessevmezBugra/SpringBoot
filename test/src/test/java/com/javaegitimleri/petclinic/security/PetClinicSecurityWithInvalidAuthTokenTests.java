@@ -20,21 +20,21 @@ import com.javaegitimleri.petclinic.service.PetClinicService;
 @SpringBootTest 
 public class PetClinicSecurityWithInvalidAuthTokenTests {
 	
-	@Autowired
-	private PetClinicService petClinicService;
-	
-	@Before	
-	public void setUp() {
-		TestingAuthenticationToken auth = new TestingAuthenticationToken("user", "secret","ROLE_XXX");
-		SecurityContextHolder.getContext().setAuthentication(auth);
-	}
-	
-	@After
-	public void tearDown() {
-		SecurityContextHolder.clearContext();
-	}
-	@Test(expected=AccessDeniedException.class)
-	public void testFindOwners() {
-		petClinicService.findOwners();
-	}
+//	@Autowired
+//	private PetClinicService petClinicService;
+//	
+//	@Before	
+//	public void setUp() {
+//		TestingAuthenticationToken auth = new TestingAuthenticationToken("user", "secret","ROLE_XXX");
+//		SecurityContextHolder.getContext().setAuthentication(auth);
+//	}
+//	
+//	@After
+//	public void tearDown() {
+//		SecurityContextHolder.clearContext();
+//	}
+//	@Test(expected=AccessDeniedException.class)
+//	public void testFindOwners() {
+//		petClinicService.findOwners();
+//	}
 }

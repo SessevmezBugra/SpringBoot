@@ -25,22 +25,22 @@ import com.javaegitimleri.petclinic.service.PetClinicService;
 @SpringBootTest 
 public class PetClinicSecurityWithValidAuthTokenTests {
 	
-	@Autowired
-	private PetClinicService petClinicService;
-	
-	@Before	
-	public void setUp() {
-		TestingAuthenticationToken auth = new TestingAuthenticationToken("user", "secret","ROLE_USER");
-		SecurityContextHolder.getContext().setAuthentication(auth);
-	}
-	
-	@After
-	public void tearDown() {
-		SecurityContextHolder.clearContext();
-	}
-	@Test
-	public void testFindOwners() {
-		List<Owner> owners = petClinicService.findOwners();
-		MatcherAssert.assertThat(owners.size(), Matchers.equalTo(10));
-	}
+//	@Autowired
+//	private PetClinicService petClinicService;
+//	
+//	@Before	
+//	public void setUp() {
+//		TestingAuthenticationToken auth = new TestingAuthenticationToken("user", "secret","ROLE_USER");
+//		SecurityContextHolder.getContext().setAuthentication(auth);
+//	}
+//	
+//	@After
+//	public void tearDown() {
+//		SecurityContextHolder.clearContext();
+//	}
+//	@Test
+//	public void testFindOwners() {
+//		List<Owner> owners = petClinicService.findOwners();
+//		MatcherAssert.assertThat(owners.size(), Matchers.equalTo(10));
+//	}
 }

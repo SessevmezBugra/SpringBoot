@@ -1,0 +1,8 @@
+C:\Users\Bugra\git\SpringBoot\test\src\test\java\com\javaegitimleri\petclinic\web\PetClinicIntegrationTests.java
+C:\Users\Bugra\git\SpringBoot\test\src\test\java\com\javaegitimleri\petclinic\web\OwnersWebMvcTests.java
+C:\Users\Bugra\git\SpringBoot\test\src\test\java\com\javaegitimleri\petclinic\dao\OwnerRepositoryTests.java
+C:\Users\Bugra\git\SpringBoot\test\src\test\java\com\javaegitimleri\petclinic\security\PetClinicSecurityWithInvalidAuthTokenTests.java
+C:\Users\Bugra\git\SpringBoot\test\src\test\java\com\javaegitimleri\petclinic\security\PetClinicSecurityWithValidAuthTokenTests.java
+C:\Users\Bugra\git\SpringBoot\test\src\test\java\com\javaegitimleri\petclinic\web\PetClinicRestControllerTests.java
+C:\Users\Bugra\git\SpringBoot\test\src\test\java\com\javaegitimleri\petclinic\security\PetClinicSecurityWithoutAuthTokenTests.java
+C:\Users\Bugra\git\SpringBoot\test\src\test\java\com\javaegitimleri\petclinic\web\PasswordEncoderTests.java

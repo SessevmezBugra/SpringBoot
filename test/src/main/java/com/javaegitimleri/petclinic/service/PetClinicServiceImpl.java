@@ -33,7 +33,7 @@ public class PetClinicServiceImpl implements PetClinicService {
 	
 	@Override
 	@Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
-	@Secured(value= {"ROLE_USER","ROLE_EDITOR"})
+//	@Secured(value= {"ROLE_USER","ROLE_EDITOR"})
 	public List<Owner> findOwners() {
 		return ownerRepository.findAll();
 	}

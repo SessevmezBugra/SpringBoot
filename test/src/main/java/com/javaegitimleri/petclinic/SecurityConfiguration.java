@@ -22,5 +22,6 @@ public class SecurityConfiguration extends AbstractSecurityConfiguration {
 		http.authorizeRequests().anyRequest().authenticated(); 
 		http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").failureUrl("/login.html?loginFailed=true");
 		http.rememberMe().userDetailsService(userDetailsService);
+		http.httpBasic();
 	}
 }
