@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 public class RestSecurityConfiguration extends AbstractSecurityConfiguration {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		super.configure(http);
 		http.authorizeRequests().antMatchers("/rest/**").access("hasRole('EDITOR')");
 		http.csrf().disable();
 		http.httpBasic();

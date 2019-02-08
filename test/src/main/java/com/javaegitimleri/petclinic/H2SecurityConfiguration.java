@@ -5,8 +5,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration
 @Order(value=0)
+@Configuration
 public class H2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override

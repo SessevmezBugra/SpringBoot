@@ -6,6 +6,7 @@ INSERT INTO authorities VALUES('user1','ROLE_USER');
 INSERT INTO authorities VALUES('user2','ROLE_USER');
 INSERT INTO authorities VALUES('user2','ROLE_EDITOR');
 INSERT INTO authorities VALUES('user3','ROLE_USER');
+INSERT INTO authorities VALUES('user3','ROLE_ANONYMOUS');
 INSERT INTO authorities VALUES('user3','ROLE_EDITOR');
 INSERT INTO authorities VALUES('user3','ROLE_ADMIN');
 
