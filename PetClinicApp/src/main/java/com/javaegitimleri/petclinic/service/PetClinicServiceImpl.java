@@ -12,8 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.javaegitimleri.petclinic.dao.OwnerRepository;
 import com.javaegitimleri.petclinic.dao.PetRepository;
+import com.javaegitimleri.petclinic.dao.jpa.VetRepository;
 import com.javaegitimleri.petclinic.exception.OwnerNotFoundException;
+import com.javaegitimleri.petclinic.exception.VetNotFoundException;
 import com.javaegitimleri.petclinic.model.Owner;
+import com.javaegitimleri.petclinic.model.Vet;
 
 @Service
 @Transactional(rollbackFor=Exception.class)
@@ -23,8 +26,15 @@ public class PetClinicServiceImpl implements PetClinicService {
 	
 	private PetRepository petRepository; 
 	
+	private VetRepository vetRepository;
+	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	public void setVetRepository(VetRepository vetRepository) {
+		this.vetRepository = vetRepository;
+	}
 	
 	@Autowired
 	public void setOwnerRepositoryitory(OwnerRepository ownerRepository) {
@@ -34,6 +44,16 @@ public class PetClinicServiceImpl implements PetClinicService {
 	@Autowired
 	public void setPetRepository(PetRepository petRepository) {
 		this.petRepository = petRepository;
+	}
+	
+	@Override
+	public List<Vet> findVets() {
+		return vetRepository.findAll();
+	}
+
+	@Override
+	public Vet findVet(Long id) throws VetNotFoundException {
+		return vetRepository.findById(id).orElseThrow(()->{return new VetNotFoundException("Vet not found!");});
 	}
 	
 	@Override
@@ -60,12 +80,12 @@ public class PetClinicServiceImpl implements PetClinicService {
 	public void createOwner(Owner owner) {
 		ownerRepository.create(owner);
 		
-		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		mailMessage.setFrom("sessevmezbugra@gmail.com");
-		mailMessage.setTo("bugra.sessevmez@visteknoloji.com");
-		mailMessage.setSubject("Owner created!");
-		mailMessage.setText("Owner entity with id :"+owner.getId()+" created successfully.");
-		mailSender.send(mailMessage);
+//		SimpleMailMessage mailMessage = new SimpleMailMessage();
+//		mailMessage.setFrom("sessevmezbugra@gmail.com");
+//		mailMessage.setTo("bugra.sessevmez@visteknoloji.com");
+//		mailMessage.setSubject("Owner created!");
+//		mailMessage.setText("Owner entity with id :"+owner.getId()+" created successfully.");
+//		mailSender.send(mailMessage);
 	}
 
 	@Override

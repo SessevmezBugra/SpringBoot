@@ -17,6 +17,12 @@ CREATE TABLE public.t_owner(
 	last_name varchar(255) NOT NULL
 );
 
+CREATE TABLE public.t_vet(
+	id bigint NOT NULL,
+	first_name varchar(255) NOT NULL,
+	last_name varchar(255) NOT NULL
+);
+
 CREATE TABLE public.t_pet(
 	id bigint NOT NULL,
 	name varchar(255),
@@ -26,6 +32,8 @@ CREATE TABLE public.t_pet(
 
 
 ALTER TABLE public.t_owner ADD CONSTRAINT public.constraint_1 PRIMARY KEY(id);
+
+ALTER TABLE public.t_vet ADD CONSTRAINT public.constraint_32 PRIMARY KEY(id);
 
 ALTER TABLE public.t_pet ADD CONSTRAINT public.constraint_2 PRIMARY KEY(id);
 
