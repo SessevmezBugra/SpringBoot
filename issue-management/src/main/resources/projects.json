@@ -1,0 +1,17 @@
+[
+	{
+		"_class":"com.bugrasessevmez.issuemanagement.entity.Project",
+		"projectCode":"IM",
+		"projectName":"Issue Management Project"
+	},
+	{
+		"_class":"com.bugrasessevmez.issuemanagement.entity.Project",
+		"projectCode":"IM2",
+		"projectName":"Issue Management Project"
+	},
+	{
+		"_class":"com.bugrasessevmez.issuemanagement.entity.Project",
+		"projectCode":"IM3",
+		"projectName":"Issue Management Project"
+	}
+]

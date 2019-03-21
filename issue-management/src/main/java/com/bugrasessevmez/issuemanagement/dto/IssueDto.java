@@ -4,12 +4,15 @@ import java.util.Date;
 
 import com.bugrasessevmez.issuemanagement.enums.IssueStatus;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(value="Issue Transfer Object")
 public class IssueDto {
 	private Long id;
 	private String description;
 	private String details;
 	private Date date;
-	private IssueStatus status; 
+	private IssueStatus issueStatus; 
 	private UserDto assignee;
 	private ProjectDto project;
 	public Long getId() {
@@ -36,12 +39,6 @@ public class IssueDto {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public IssueStatus getStatus() {
-		return status;
-	}
-	public void setStatus(IssueStatus status) {
-		this.status = status;
-	}
 	public UserDto getAssignee() {
 		return assignee;
 	}
@@ -53,6 +50,12 @@ public class IssueDto {
 	}
 	public void setProject(ProjectDto project) {
 		this.project = project;
+	}
+	public IssueStatus getIssueStatus() {
+		return issueStatus;
+	}
+	public void setIssueStatus(IssueStatus issueStatus) {
+		this.issueStatus = issueStatus;
 	}
 	
 	

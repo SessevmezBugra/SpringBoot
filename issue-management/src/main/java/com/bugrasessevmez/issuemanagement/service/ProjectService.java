@@ -5,19 +5,25 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.bugrasessevmez.issuemanagement.dto.ProjectDto;
 import com.bugrasessevmez.issuemanagement.entity.Project;
+import com.bugrasessevmez.issuemanagement.util.TPage;
 
 public interface ProjectService {
 	
-	Project save(Project project);
+	ProjectDto save(Project project);
 	
-	Project getById(Long id);
+	ProjectDto getById(Long id);
 	
-	List<Project> getByProjectCode(String projectCode);
+	ProjectDto getByProjectCode(String projectCode);
 	
-	List<Project> getByProjectCodeContains(String projectCode);
+	List<ProjectDto> getByProjectCodeContains(String projectCode);
 	
-	Page<Project> getAllPageable(Pageable pageable);
+	TPage<ProjectDto> getAllPageable(Pageable pageable);
 	
 	Boolean delete(Project project);
+	
+	Boolean delete(Long id);
+	
+	ProjectDto update(Project project);
 }

@@ -13,6 +13,12 @@ public class TPage<T> {
 	private Long totalElements;
 	private List<T> content;
 	
+	public TPage() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
 	public void setStat(Page page, List<T> list) {
 		this.number = page.getNumber();
 		this.size = page.getSize();
@@ -21,4 +27,54 @@ public class TPage<T> {
 		this.totalElements = page.getTotalElements();
 		this.content = list;
 	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public Sort getSort() {
+		return sort;
+	}
+
+	public void setSort(Sort sort) {
+		this.sort = sort;
+	}
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public Long getTotalElements() {
+		return totalElements;
+	}
+
+	public void setTotalElements(Long totalElements) {
+		this.totalElements = totalElements;
+	}
+
+	public List<T> getContent() {
+		return content;
+	}
+
+	public void setContent(List<T> content) {
+		this.content = content;
+	}
+	
+	
 }

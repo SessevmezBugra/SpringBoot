@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="project")
@@ -24,6 +25,7 @@ public class Project extends BaseEntity{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@NotNull
 	@Column(name="project_code",length=30)
 	private String projectCode;
 	

@@ -38,9 +38,9 @@ public class Issue extends BaseEntity{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
-	@Column(name="status")
+	@Column(name="issue_status")
 	@Enumerated(EnumType.STRING)
-	private IssueStatus status;
+	private IssueStatus issueStatus;
 	
 	@JoinColumn(name="assignee_user_id")
 	@ManyToOne(optional=true, fetch=FetchType.LAZY)
@@ -82,13 +82,6 @@ public class Issue extends BaseEntity{
 		this.date = date;
 	}
 
-	public IssueStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(IssueStatus status) {
-		this.status = status;
-	}
 
 	public User getAssignee() {
 		return assignee;
@@ -109,7 +102,15 @@ public class Issue extends BaseEntity{
 	@Override
 	public String toString() {
 		return "Issue [id=" + id + ", description=" + description + ", details=" + details + ", date=" + date
-				+ ", status=" + status + ", assignee=" + assignee + ", project=" + project + "]";
+				+ ", status=" + issueStatus + ", assignee=" + assignee + ", project=" + project + "]";
+	}
+
+	public IssueStatus getIssueStatus() {
+		return issueStatus;
+	}
+
+	public void setIssueStatus(IssueStatus issueStatus) {
+		this.issueStatus = issueStatus;
 	}
 	
 	
