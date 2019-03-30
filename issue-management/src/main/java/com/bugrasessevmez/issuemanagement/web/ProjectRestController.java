@@ -1,5 +1,7 @@
 package com.bugrasessevmez.issuemanagement.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Pageable;
@@ -35,6 +37,12 @@ public class ProjectRestController {
 	@RequestMapping(value="/pagination",method=RequestMethod.GET)
 	public ResponseEntity<TPage<ProjectDto>> getAllByPagination(Pageable pageable){
 		return ResponseEntity.ok(projectService.getAllPageable(pageable));
+	}
+	
+	@ApiOperation(value="Get All Project",response=ProjectDto.class)
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<ProjectDto>> getAll(){
+		return ResponseEntity.ok(projectService.getAll());
 	}
 	
 	@ApiOperation(value="Get By Id Operation",response=ProjectDto.class)

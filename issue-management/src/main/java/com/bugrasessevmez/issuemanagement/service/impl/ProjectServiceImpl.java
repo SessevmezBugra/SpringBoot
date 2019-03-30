@@ -42,6 +42,12 @@ public class ProjectServiceImpl implements ProjectService{
 		page.setStat(data, Arrays.asList(modelMapper.map(data.getContent(), ProjectDto[].class)));
 		return page;
 	}
+	
+	@Override
+	public List<ProjectDto> getAll() {
+		List<Project> data = projectRepository.findAll();
+		return Arrays.asList(modelMapper.map(data, ProjectDto[].class));
+	}
 
 	@Override
 	public ProjectDto getByProjectCode(String projectCode) {

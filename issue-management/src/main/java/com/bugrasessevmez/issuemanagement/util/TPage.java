@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
 public class TPage<T> {
-	private int number;
+	private int page;
 	private int size;
 	private Sort sort;
 	private int totalPage;
@@ -20,20 +20,12 @@ public class TPage<T> {
 	
 	
 	public void setStat(Page page, List<T> list) {
-		this.number = page.getNumber();
+		this.page = page.getNumber();
 		this.size = page.getSize();
 		this.sort = page.getSort();
 		this.totalPage = page.getTotalPages();
 		this.totalElements = page.getTotalElements();
 		this.content = list;
-	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
 	}
 
 	public int getSize() {
@@ -75,6 +67,13 @@ public class TPage<T> {
 	public void setContent(List<T> content) {
 		this.content = content;
 	}
-	
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
 	
 }
