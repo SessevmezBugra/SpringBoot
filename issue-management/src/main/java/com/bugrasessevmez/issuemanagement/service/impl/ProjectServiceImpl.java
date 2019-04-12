@@ -9,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.bugrasessevmez.issuemanagement.dao.ProjectRepository;
+import com.bugrasessevmez.issuemanagement.dao.UserRepository;
 import com.bugrasessevmez.issuemanagement.dto.ProjectDto;
 import com.bugrasessevmez.issuemanagement.entity.Project;
+import com.bugrasessevmez.issuemanagement.entity.User;
 import com.bugrasessevmez.issuemanagement.service.ProjectService;
 import com.bugrasessevmez.issuemanagement.util.TPage;
 
@@ -20,10 +22,12 @@ public class ProjectServiceImpl implements ProjectService{
 	
 	private final ProjectRepository projectRepository;
 	private final ModelMapper modelMapper;
+	private final UserRepository userRepository;
 	
-	public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper modelMapper) {
+	public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper modelMapper, UserRepository userRepository) {
 		this.projectRepository = projectRepository;
 		this.modelMapper = modelMapper;
+		this.userRepository = userRepository; 
 	}
 
 	@Override
@@ -31,6 +35,8 @@ public class ProjectServiceImpl implements ProjectService{
 		if(projectRepository.getByProjectCode(project.getProjectCode()) != null) {
 			throw new IllegalArgumentException("ProjectCode cannot be same");
 		}
+		User user = userRepository.getOne(project.getManager().getId());
+		project.setManager(user);
 		return modelMapper.map(projectRepository.save(project), ProjectDto.class);
 	}
 

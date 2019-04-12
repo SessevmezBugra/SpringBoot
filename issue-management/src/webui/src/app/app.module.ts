@@ -4,7 +4,7 @@ import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app.routing.module";
 import {AppLayoutComponent} from "./_layout/app-layout/app-layout.component";
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {FooterComponent} from "./_layout/footer/footer.component";
 import {HeaderComponent} from "./_layout/header/header.component";
 import {SidebarComponent} from "./_layout/sidebar/sidebar.component";
@@ -13,6 +13,11 @@ import {ToastNoAnimation, ToastNoAnimationModule, ToastrModule} from "ngx-toastr
 import { ApiService } from './services/api.service';
 import {TranslateModule,TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { UserService } from './services/shared/user.service';
+import { IssueService } from './services/shared/issue.service';
+import { ProjectService } from './services/shared/project.service';
+import { IssueHistoryService } from './services/shared/issue.history.service';
+import { NotfoundComponent } from './shared/notfound/notfound.component';
 
 export const createTranslateLoader = (http: HttpClient)=>{
   return new TranslateHttpLoader(http,'./assets/i18n/','.json');
@@ -24,7 +29,8 @@ export const createTranslateLoader = (http: HttpClient)=>{
     AppLayoutComponent,
     FooterComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,7 @@ export const createTranslateLoader = (http: HttpClient)=>{
     }),
 
   ],
-  providers: [ApiService],
+  providers: [ApiService, UserService, IssueService, ProjectService, IssueHistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

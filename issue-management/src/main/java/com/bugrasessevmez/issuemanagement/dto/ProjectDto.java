@@ -19,6 +19,13 @@ public class ProjectDto {
 	@ApiModelProperty(required=true, value="Name Of Project")
 	private String projectName;
 	
+	@ApiModelProperty(required=true, value="Project Manager")
+	private UserDto manager;
+	
+	@NotNull
+    @ApiModelProperty(required = true,value = "Project Manager ID")
+    private Long managerId;
+	
 	public Long getId() {
 		return id;
 	}
@@ -42,4 +49,13 @@ public class ProjectDto {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
+
+	public UserDto getManager() {
+		return manager;
+	}
+
+	public void setManager(UserDto manager) {
+		this.manager = manager;
+	}
+
 }

@@ -1,17 +1,26 @@
 package com.bugrasessevmez.issuemanagement.service;
 
-import org.springframework.data.domain.Page;
+import java.util.List;
+
 import org.springframework.data.domain.Pageable;
 
+import com.bugrasessevmez.issuemanagement.dto.UserDto;
 import com.bugrasessevmez.issuemanagement.entity.User;
+import com.bugrasessevmez.issuemanagement.util.TPage;
 
 public interface UserService {
 	
-	User save(User user);
+	UserDto save(User user);
 	
-	User getById(Long id);
+	UserDto getById(Long id);
 	
-	Page<User > getAllPageable(Pageable pageable);
+	TPage<UserDto > getAllPageable(Pageable pageable);
 	
-	User getByUserName(String username);
+	List<UserDto> getAll();
+	
+	UserDto getByUserName(String username);
+	
+	UserDto update(User user);
+	
+	Boolean delete(Long id);
 }

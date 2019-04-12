@@ -54,6 +54,8 @@ public class ProjectRestController {
 	@ApiOperation(value="Create Operation",response=ProjectDto.class)
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<ProjectDto> createProject(@Valid @RequestBody Project project){
+		System.err.println("TESTTTTTTTT");
+		System.err.println(project.toString());
 		return ResponseEntity.ok(projectService.save(project));
 	}
 	

@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModel;
 
 @ApiModel(value="Issue Transfer Object")
 public class IssueDto {
+	
 	private Long id;
 	private String description;
 	private String details;
@@ -15,6 +16,8 @@ public class IssueDto {
 	private IssueStatus issueStatus; 
 	private UserDto assignee;
 	private ProjectDto project;
+	private Long projectId;
+	
 	public Long getId() {
 		return id;
 	}
@@ -57,6 +60,10 @@ public class IssueDto {
 	public void setIssueStatus(IssueStatus issueStatus) {
 		this.issueStatus = issueStatus;
 	}
-	
-	
+	public Long getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
 }

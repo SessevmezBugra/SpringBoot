@@ -1,6 +1,8 @@
 package com.bugrasessevmez.issuemanagement.service.impl;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -8,8 +10,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.bugrasessevmez.issuemanagement.dao.IssueRepository;
+import com.bugrasessevmez.issuemanagement.dto.IssueDetailDto;
 import com.bugrasessevmez.issuemanagement.dto.IssueDto;
+import com.bugrasessevmez.issuemanagement.dto.IssueHistoryDto;
 import com.bugrasessevmez.issuemanagement.entity.Issue;
+import com.bugrasessevmez.issuemanagement.entity.IssueHistory;
+import com.bugrasessevmez.issuemanagement.service.IssueHistoryService;
 import com.bugrasessevmez.issuemanagement.service.IssueService;
 import com.bugrasessevmez.issuemanagement.util.TPage;
 
@@ -19,10 +25,12 @@ public class IssueServiceImpl implements IssueService{
 
 	private final IssueRepository issueRepository;
 	private final ModelMapper modelMapper;
+	private final IssueHistoryService issueHistoryService;
 	
-	public IssueServiceImpl(IssueRepository issueRepository, ModelMapper modelMapper) {
+	public IssueServiceImpl(IssueRepository issueRepository, ModelMapper modelMapper, IssueHistoryService issueHistoryService) {
 		this.issueRepository = issueRepository;
 		this.modelMapper = modelMapper;
+		this.issueHistoryService = issueHistoryService;
 	}
 	
 	@Override
@@ -36,6 +44,15 @@ public class IssueServiceImpl implements IssueService{
 	@Override
 	public IssueDto getById(Long id) {
 		return modelMapper.map(issueRepository.getOne(id), IssueDto.class);
+	}
+	
+	@Override
+	public IssueDetailDto getByIdWithDetails(Long id) {
+		Issue issue = issueRepository.getOne(id);
+		IssueDetailDto issueDetailDto = modelMapper.map(issue, IssueDetailDto.class);
+		List<IssueHistoryDto> historyDtos = issueHistoryService.getByIssueId(id);
+		issueDetailDto.setIssueHistories(historyDtos);
+		return issueDetailDto;
 	}
 
 	@Override
@@ -61,7 +78,19 @@ public class IssueServiceImpl implements IssueService{
 
 	@Override
 	public IssueDto update(Issue issue) {
+		IssueHistory history = new IssueHistory();
+		history.setAssignee(issue.getAssignee());
+		history.setDate(new Date());
+		history.setDetails(issue.getDetails());
+		history.setIssue(issue);
+		history.setIssueStatus(issue.getIssueStatus());
+		issue.addIssueHistory(history);
 		return modelMapper.map(issueRepository.save(issue), IssueDto.class);
+	}
+
+	@Override
+	public List<IssueDto> getAll() {
+		return Arrays.asList(modelMapper.map(issueRepository.findAll(),IssueDto[].class));
 	}
 
 }

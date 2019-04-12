@@ -28,7 +28,10 @@ public class IssueHistory extends BaseEntity{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@JoinColumn(name="issue_id")
+	@Column(name="description",length=1000)
+	private String description;
+	
+	@JoinColumn(name="issue_id",referencedColumnName="id")
 	@ManyToOne(optional=true,fetch=FetchType.LAZY)
 	private Issue issue;
 	
