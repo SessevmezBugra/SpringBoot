@@ -1,9 +1,7 @@
 package com.bugrasessevmez.issuemanagement.entity;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -52,9 +49,6 @@ public class Issue extends BaseEntity{
 	@JoinColumn(name="project_id")
 	@ManyToOne(fetch=FetchType.LAZY,optional=true)
 	private Project project;
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="issue",cascade=CascadeType.ALL)
-	private List<IssueHistory> issueHistories; 
 
 	public Long getId() {
 		return id;
@@ -117,18 +111,6 @@ public class Issue extends BaseEntity{
 
 	public void setIssueStatus(IssueStatus issueStatus) {
 		this.issueStatus = issueStatus;
-	}
-
-	public List<IssueHistory> getIssueHistories() {
-		return issueHistories;
-	}
-
-	public void setIssueHistories(List<IssueHistory> issueHistories) {
-		this.issueHistories = issueHistories;
-	}
-	
-	public void addIssueHistory(IssueHistory issueHistory) {
-		this.issueHistories.add(issueHistory);
 	}
 
 }

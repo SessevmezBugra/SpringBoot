@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IssueService } from 'src/app/services/shared/issue.service';
 import { UserService } from 'src/app/services/shared/user.service';
@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class IssueDetailComponent implements OnInit {
 
+  @ViewChild('tplDateCell') tplDateCell: TemplateRef<any>;
   id;
   private sub: any;
 
@@ -39,9 +40,9 @@ export class IssueDetailComponent implements OnInit {
     }); 
 
     this.columns = [
-      {prop:'id', name:'No'},
+      {prop:'id', name:'No', maxWidth: 30},
       {prop:'description', name:'Description'},
-      {prop:'date', name:'Issue Date'},
+      {prop:'date', name:'Issue Date', cellTemplate: this.tplDateCell},
       {prop:'issueStatus', name:'Issue Status'},
       {prop:'assignee.nameSurname', name:'Assignee'},
       {prop:'issue.project.projectName', name:'Project Name'},
@@ -83,15 +84,15 @@ export class IssueDetailComponent implements OnInit {
       id: response['id'],
       description: response['description'],
       details: response['details'],
-      date: response['date'],
+      date: this.fromJsonDate(response['date']),
       issueStatus: response['issueStatus'],
       assignee: this.formBuilder.group({
-        id: response['assignee']['id']
+        id: response['assignee'] ? (response['assignee']['id'] ? response['assignee']['id'] : '') : ''
       }),
       project: this.formBuilder.group({
         id: response['project']['id'],
         manager: this.formBuilder.group({
-          nameSurname: response['project']['manager']['nameSurname']
+          nameSurname: response['project']['manager'] ? (response['project']['manager']['nameSurname'] ? response['project']['manager']['nameSurname'] : '') : ''
         })
       })
     });

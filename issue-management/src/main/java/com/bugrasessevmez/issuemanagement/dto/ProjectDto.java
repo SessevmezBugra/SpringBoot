@@ -1,7 +1,5 @@
 package com.bugrasessevmez.issuemanagement.dto;
 
-import javax.validation.constraints.NotNull;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -11,18 +9,15 @@ public class ProjectDto {
 	@ApiModelProperty(value="Project ID")
 	private Long id;
 	
-	@NotNull
 	@ApiModelProperty(required=true, value="Code Of Project")
 	private String projectCode;
 	
-	@NotNull
 	@ApiModelProperty(required=true, value="Name Of Project")
 	private String projectName;
 	
 	@ApiModelProperty(required=true, value="Project Manager")
 	private UserDto manager;
 	
-	@NotNull
     @ApiModelProperty(required = true,value = "Project Manager ID")
     private Long managerId;
 	

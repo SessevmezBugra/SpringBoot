@@ -19,7 +19,7 @@ public class TPage<T> {
 	
 	
 	
-	public void setStat(Page page, List<T> list) {
+	public void setStat(Page<?> page, List<T> list) {
 		this.page = page.getNumber();
 		this.size = page.getSize();
 		this.sort = page.getSort();

@@ -52,7 +52,6 @@ public class IssueRestController {
 	@RequestMapping(value="/detail/{id}",method=RequestMethod.GET)	
 	@ApiOperation(value="Get By Id Operation", response= IssueDto.class)
 	public ResponseEntity<IssueDetailDto> getByIdWithDetails(@PathVariable(value="id", required=true) Long id){
-		System.err.println("ID : "+id);
 		return ResponseEntity.ok(issueService.getByIdWithDetails(id));
 	}
 	
@@ -64,7 +63,7 @@ public class IssueRestController {
 	
 	@RequestMapping(method=RequestMethod.PUT)
 	@ApiOperation(value="Update Operation", response= IssueDto.class)
-	public ResponseEntity<IssueDto> updateProject(@Valid @RequestBody Issue issue){
+	public ResponseEntity<IssueDto> updateProject(@RequestBody Issue issue){
 		return ResponseEntity.ok(issueService.update(issue));
 	}
 	

@@ -8,5 +8,5 @@ import com.bugrasessevmez.issuemanagement.entity.IssueHistory;
 
 public interface IssueHistoryRepository extends JpaRepository<IssueHistory, Long>{
 	
-	List<IssueHistory> getByIssueId(Long id);
+	List<IssueHistory> getByIssueIdOrderById(Long id);
 }

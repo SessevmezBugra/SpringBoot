@@ -6,9 +6,11 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bugrasessevmez.issuemanagement.dao.UserRepository;
+import com.bugrasessevmez.issuemanagement.dto.RegistrationRequest;
 import com.bugrasessevmez.issuemanagement.dto.UserDto;
 import com.bugrasessevmez.issuemanagement.entity.User;
 import com.bugrasessevmez.issuemanagement.service.UserService;
@@ -19,10 +21,12 @@ public class UserServiceImpl implements UserService{
 
 	private final UserRepository userRepository;
 	private final ModelMapper modelMapper;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+	public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.userRepository = userRepository;
 		this.modelMapper = modelMapper;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 
 	@Override
@@ -65,6 +69,22 @@ public class UserServiceImpl implements UserService{
 	public Boolean delete(Long id) {
 		userRepository.deleteById(id);
 		return true;
+	}
+	
+	@Override
+	public Boolean register(RegistrationRequest registrationRequest) {
+		try {
+			User user = new User();
+			user.setEmail(registrationRequest.getEmail());
+			user.setNameSurname(registrationRequest.getNameSurname());
+			user.setPassword(bCryptPasswordEncoder.encode(registrationRequest.getPassword()));
+			user.setUsername(registrationRequest.getUsername());
+			userRepository.save(user);
+			return Boolean.TRUE;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			return Boolean.FALSE;
+		}
 	}
 
 }

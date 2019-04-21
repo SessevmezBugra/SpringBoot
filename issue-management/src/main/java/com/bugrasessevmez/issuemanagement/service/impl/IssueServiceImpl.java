@@ -15,6 +15,7 @@ import com.bugrasessevmez.issuemanagement.dto.IssueDto;
 import com.bugrasessevmez.issuemanagement.dto.IssueHistoryDto;
 import com.bugrasessevmez.issuemanagement.entity.Issue;
 import com.bugrasessevmez.issuemanagement.entity.IssueHistory;
+import com.bugrasessevmez.issuemanagement.enums.IssueStatus;
 import com.bugrasessevmez.issuemanagement.service.IssueHistoryService;
 import com.bugrasessevmez.issuemanagement.service.IssueService;
 import com.bugrasessevmez.issuemanagement.util.TPage;
@@ -35,9 +36,8 @@ public class IssueServiceImpl implements IssueService{
 	
 	@Override
 	public IssueDto save(Issue issue) {
-		if(issue.getDate() == null) {
-			throw new IllegalArgumentException("Issue cannot be null");
-		}
+		issue.setDate(new Date());
+		issue.setIssueStatus(IssueStatus.OPEN);
 		return modelMapper.map(issueRepository.save(issue), IssueDto.class);
 	}
 
@@ -84,7 +84,7 @@ public class IssueServiceImpl implements IssueService{
 		history.setDetails(issue.getDetails());
 		history.setIssue(issue);
 		history.setIssueStatus(issue.getIssueStatus());
-		issue.addIssueHistory(history);
+		issueHistoryService.save(history);
 		return modelMapper.map(issueRepository.save(issue), IssueDto.class);
 	}
 
